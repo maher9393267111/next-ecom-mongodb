@@ -4,6 +4,7 @@ import {useState,useEffect} from 'react'
 import styles from '../styles/Home.module.css'
 import {postData, getData, } from '../utils/fetchdata'
 import { useDispatch, useSelector } from "react-redux"
+import { increment } from '../redux/productsreducer'
 export default function Home() {
 
 
@@ -15,6 +16,8 @@ const {name,count}  = useSelector(state => state.product)
 
 
 useEffect(() => {
+
+  dispatch(increment())
 
   getData('products').then(data => {
 // console.log(data)
