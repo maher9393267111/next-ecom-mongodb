@@ -88,6 +88,9 @@ const createProduct = async (req, res) => {
         // const result = await auth(req, res)
         // if(result.role !== 'admin') return res.status(400).json({err: 'Authentication is not valid.'})
 
+console.log('body--->', req.body)
+
+
 const mainImages =  req.files
 
 console.log(req.body, req.files)

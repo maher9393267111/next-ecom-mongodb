@@ -25,7 +25,7 @@ const handleSubmit = (e) => {
      formData.set("image", itemimage);
      console.log(formData, 'formData')
 
-    postData("products", formData).then((data) => {
+    postData("products", ).then((data) => {
 
         console.log(data);
     });
