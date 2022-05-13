@@ -1,88 +1,39 @@
 const mongoose = require("mongoose");
 
-const carSchema = new mongoose.Schema(
-    {
-        name: {
-          type: String,
-          trim: true,
-          required: "Name is required",
-          minlength: [2, "Too short"],
-          maxlength: [32, "Too long"],
-         
-         
+const  ProductSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: "Name is required",
+      minlength: [2, "Too short"],
+      maxlength: [32, "Too long"],
+
       text: true,
-       //   index: true,
-        },
-    
-        price: { type: Number },
-        tittle: { type: String,text: true, },
-        description: { type: String,text: true, },
-        maked_at: { type: Date, default: Date.now },
-    
-        car_id: { type: Number, required: true },
-    
-      
-        inside_images:
-            { 
+      //   index: true,
+    },
 
-                koltuk_images:[  {secure_url : String  ,public_id:String}     ]    ,
-           
-           
-            konsole_images:[  {secure_url : String  ,public_id:String}     ]    ,
-           
-           
-           }
+    price: { type: Number },
+    tittle: { type: String, text: true },
+    description: { type: String, text: true },
+
+    category: { type: mongoose.Schema.ObjectId, ref: "Category" },
 
 
+// array of colors with the color name and color image
 
-        
-  ,  
+    colors: [
 
+        {
+            name: { type: String, text: true },
+            image: { type: String, text: true },
+        }
 
-
-outside_images:
-
-
-{ 
-
-     back_images:[  {secure_url : String  ,public_id:String}     ]    ,
+    ],
 
 
- front_images:[  {secure_url : String  ,public_id:String}     ]    ,
+  },
+  { timestamps: true }
+);
 
-
-}
-
-
-
-
-,
-
-
-category: { type: mongoose.Schema.ObjectId, ref: "Category" },
-
-
-yakit_tipi: { type: String },
-
-mesafe: { type: String },
-
-creted_at: { type: Date, default: Date.now },
-city: { type: String },
-
-satici_name: { type: String },
-
-cat_name: { type: String },
-
-
-
-
-
-    
-    
-        
-      },
-      { timestamps: true }
-    );
-    
-
-module.exports = mongoose.model("Car", carSchema);
+module.exports = mongoose.model("Product", ProductSchema);
