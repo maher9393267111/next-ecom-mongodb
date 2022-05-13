@@ -3,17 +3,21 @@ import Image from 'next/image'
 import {useState,useEffect} from 'react'
 import styles from '../styles/Home.module.css'
 import {postData, getData, } from '../utils/fetchdata'
+import { useDispatch, useSelector } from "react-redux"
 export default function Home() {
 
 
 const [products, setProducts] = useState('')
 
+const dispatch = useDispatch()
+
+const {name,count}  = useSelector(state => state.product)
 
 
 useEffect(() => {
 
   getData('products').then(data => {
-console.log(data)
+// console.log(data)
      setProducts(data.name)
     console.log(data)
 
@@ -31,7 +35,7 @@ console.log(data)
     <div className={styles.container}>
      
 <h1 className='    bg-green-200 text-center'>
-  next app {products}
+  next app {name} --------- {products}
 </h1>
   
 
