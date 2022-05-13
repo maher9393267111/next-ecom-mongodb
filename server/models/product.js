@@ -22,6 +22,18 @@ const  ProductSchema = new mongoose.Schema(
 
 // array of colors with the color name and color image
 
+mainImages:[
+
+  {
+
+    secure_url: { type: String },
+    public_id: { type: String },
+  }
+]
+,
+
+
+
     colors: [
 
         {

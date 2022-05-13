@@ -1,4 +1,5 @@
 import mongodb from '../../../server/mongodb';
+import Product from '../../../server/models/product'
 
 mongodb();
 
@@ -84,20 +85,29 @@ const getProducts = async (req, res) => {
 
 const createProduct = async (req, res) => {
     try {
-        const result = await auth(req, res)
-        if(result.role !== 'admin') return res.status(400).json({err: 'Authentication is not valid.'})
+        // const result = await auth(req, res)
+        // if(result.role !== 'admin') return res.status(400).json({err: 'Authentication is not valid.'})
 
-        const {title, price, inStock, description, content, category, images} = req.body
+const mainImages =  req.files
 
-        if(!title || !price || !inStock || !description || !content || category === 'all' || images.length === 0)
-        return res.status(400).json({err: 'Please add all the fields.'})
+console.log(mainImages,'------------------- main images in server')
 
 
-        const newProduct = new Products({
-            title: title.toLowerCase(), price, inStock, description, content, category, images
-        })
+        // const {title, name,price, inStock, description, content, category, } = req.body
 
-        await newProduct.save()
+       
+
+        // category === 'all'
+
+        // if(!title || !price || !name || !description  || category )
+        // return res.status(400).json({err: 'Please add all the fields.'})
+
+
+        // const newProduct = new Product({
+        //     title: title.toLowerCase(), price, inStock, description, content, category, images
+        // })
+
+        // await newProduct.save()
 
         res.json({msg: 'Success! Created a new product'})
 

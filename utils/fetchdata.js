@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:3000';
 
 
-export const getData = async (url, token) => {
+export const getData = async (url) => {
     const res = await fetch(`${baseUrl}/api/${url}`, {
         method: 'GET',
         // headers: {

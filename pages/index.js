@@ -22,7 +22,7 @@ useEffect(() => {
   getData('products').then(data => {
 // console.log(data)
      setProducts(data.name)
-     dispatch(increment({name:'mahmod'}))
+    
     console.log(data)
 
   })

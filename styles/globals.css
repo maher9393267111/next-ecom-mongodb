@@ -20,3 +20,26 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+
+
+.input-class{
+
+
+@apply 
+
+block text-center border-2 border-blue-300 focus:border-blue-500
+p-[10px]  mt-[1px] mx-auto
+
+
+
+}
+
+
+
+
+
+
+
+
