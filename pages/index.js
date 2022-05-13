@@ -17,11 +17,12 @@ const {name,count}  = useSelector(state => state.product)
 
 useEffect(() => {
 
-  dispatch(increment())
+  
 
   getData('products').then(data => {
 // console.log(data)
      setProducts(data.name)
+     dispatch(increment({name:'mahmod'}))
     console.log(data)
 
   })
@@ -38,7 +39,7 @@ useEffect(() => {
     <div className={styles.container}>
      
 <h1 className='    bg-green-200 text-center'>
-  next app {name} --------- {products}
+  next app  --------- {products}
 </h1>
   
 

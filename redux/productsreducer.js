@@ -11,7 +11,7 @@ export const productSlice = createSlice({
     reducers: {
         increment: (state, action) => {
             state.count = state.count + 1;
-            state.name = 'maherchange'
+            state.name = action.name
         }
     }
 })
