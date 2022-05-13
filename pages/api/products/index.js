@@ -1,5 +1,6 @@
 import mongodb from '../../../server/mongodb';
 // import Product from '../../../server/models/product'
+import cloudinary from '../../../utils/cloudinary'
 
 mongodb();
 
@@ -88,14 +89,52 @@ const createProduct = async (req, res) => {
         // const result = await auth(req, res)
         // if(result.role !== 'admin') return res.status(400).json({err: 'Authentication is not valid.'})
 
-console.log('body--->', req.body)
+// console.log('body--->', req.body)
 
 
-const mainImages =  req.files
+// const mainImages =  req.files
+// console.log('mainImages--->', mainImages)
+const {description,images,image1} = req.body
+console.log(image1, 'description')
 
-console.log(req.body, req.files)
 
-console.log(mainImages,'------------------- main images in server')
+
+
+// froeach image in images array upload to cloudinary
+
+// const imageobje  = []
+
+// const imagesArray = images.map(async (image11) => {
+//     const result = await cloudinary.uploader.upload(image11,(err, result) => {
+        
+// if (err) {
+//     console.log(err)
+// }
+
+// else
+// {
+//     console.log(result, 'result')
+//     imageobje.push(result)
+    
+// }
+
+       
+   
+    
+// })
+
+// })
+
+
+
+
+// console.log(imageobje, 'imageobje')
+
+
+
+
+
+
 
 
         // const {title, name,price, inStock, description, content, category, } = req.body

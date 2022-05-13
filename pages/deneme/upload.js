@@ -2,14 +2,22 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { postData, getData } from "../..//utils/fetchdata";
 import lodash from "lodash";
+import axios from "axios";
 const Upload = () => {
   const [file, setFiles] = useState();
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("desc value");
 
   const [selectedFiles, setSelectedFiles] = useState([]);
 
+  const [selectedTags, setSelectedTags] = useState({});
+ 
+
   const captureFile = (event) => {
+    const formData = new FormData();
+    setSelectedTags(event.target.files);
     console.log(event.target.files);
+    console.log('selectedTags------------', selectedTags);
+    formData.set("images", event.target.files);
     let files = [];
     for (let file of event.target.files) {
       files.push(URL.createObjectURL(file));  //  convert image file to url and push to files array
@@ -22,9 +30,24 @@ const Upload = () => {
 
   const submit = async (event) => {
     event.preventDefault();
+
   
 
-    const data = await postData("products", selectedFiles);
+   
+    const obj = {
+       description: description,
+        images: selectedFiles,
+        image1: selectedTags,
+      }
+      console.log(selectedTags[1], "----------obj");
+
+      
+       
+      
+  
+      axios.post("/api/products",obj );
+
+    
   };
 
   return (
@@ -49,6 +72,9 @@ const Upload = () => {
             type="text"
           ></input>
           <button type="submit">Submit</button>
+
+      
+
         </form>
       </div>
     </div>

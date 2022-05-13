@@ -24,7 +24,8 @@ export const postData = async (url, post, token) => {
         //     'Content-Type': 'application/json',
         //     'Authorization': token
         // },
-        body: JSON.stringify(post)
+        // body: JSON.stringify(post)
+        body : post
     })
 
     const data = await res.json()
