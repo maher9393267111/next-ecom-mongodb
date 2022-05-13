@@ -1,33 +1,29 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { postData, getData } from "../..//utils/fetchdata";
-
+import lodash from "lodash";
 const Product = () => {
 
-const [products, setProducts] = useState();
-const [images, setImages] = useState([]);
+
+ 
+
+     
+
+      const [itemimage, setitemimage] = useState([]);
+
+
 
 // send data to server
 
 const handleSubmit = (e) => {
 
     e.preventDefault();
-    // const data = {
-    //     name: "product name",
-    //     price: "product price",
-    //     inStock: "product inStock",
-    //     description: "product description",};
+   
 
-    const formData = new FormData();
-        formData.append("name", "product name");
-        formData.append("price", "product price");
-        formData.append("inStock", "product inStock");
-        formData.append("description", "product description");
-        formData.append("content", "product content");
-        formData.append("category", "product category");
-        formData.append("images", images);
-
-        console.log(formData, "form data");
+     const formData = new FormData();
+    
+     formData.set("image", itemimage);
+     console.log(formData, 'formData')
 
     postData("products", formData).then((data) => {
 
@@ -46,19 +42,7 @@ const handleSubmit = (e) => {
 
   ]);
 
-
-// handle imagechange
-
-const handleImageChange = (e) => {
-
-    e.preventDefault();
-    const files = e.target.files;
-    setImages(files);
-    console.log('image files here---->',files);
-    const data = new FormData();
-    data.append("file", files);
-
-};
+  
 
 
 
@@ -76,7 +60,39 @@ const handleImageChange = (e) => {
 
 <form>
     
-    <input type="file" multiple  onChange={handleImageChange}  name="images"  />
+    <input type="file" multiple  
+    
+    onChange={(e) => {
+        // console.log(e.target.files)
+        let { files } = e.target;
+        lodash.forEach(files, (file) => {
+          console.log(file);
+          setitemimage((item) => [...item, file]);
+          console.log(itemimage);
+        });
+      }}
+    
+    name="photo"  />
+
+
+
+<div>
+    
+
+<div className='form-group'>
+        <label className='text-muted'>Name</label>
+        <input
+        
+          type='text'
+          className='form-control'
+        //   value={name}
+        />
+      </div>
+
+
+
+</div>
+
 
 
 </form>
