@@ -1,151 +1,60 @@
-import React from 'react';
-import { useState,useEffect } from 'react';
-import {postData, getData, } from '../..//utils/fetchdata'
-const initialState = {
-    title: 'title',
-    price: 0,
-    name: 'name',
-    description: 'desc',
-    images: [],
-    colors: [{name:'',image:''}],
-    category: 'category'
-}
-
-
+import React from "react";
+import { useState, useEffect } from "react";
+import { postData, getData } from "../..//utils/fetchdata";
 
 const Product = () => {
 
-const [state, setState] = useState(initialState)
-
-const [products, setProducts] = useState('')
+const [products, setProducts] = useState();
 
 
-useEffect(() => {
+// send data to server
 
-  
+const handleSubmit = (e) => {
 
-    
+    e.preventDefault();
+    const data = {
+        name: "product name",
+        price: "product price",
+        inStock: "product inStock",
+        description: "product description",};
 
-  }
-    , [])
-  
+    postData("products", data).then((data) => {
 
+        console.log(data);
+    });
 
+    // get data from server
 
-
-
-//-----------------------------------------------------
-const [photo, setPhoto] = useState([])
-
-
-const setPic = (event) => {
-    //   if (event.target.files && event.target.files[0]  && event.target.files.length>0)
-    //{
-       setPhoto(event.target.files);
-   console.log(event.target.files)
-console.log('photos---->>>',photo.length)
-
-     //  }
-       }
-   
+};
 
 
+  useEffect(() => {
 
 
-//-----------------------------------------------------
+  }, [
 
-const handleSubmit = e => {
+  ]);
 
-    event.preventDefault();
-    // const formDatacurrent = new FormData(e.currentTarget);
-
-    // console.log('current----->',formDatacurrent)
-
-    const formdata = new FormData()
-    e.preventDefault()
-    console.log(state)
-   
-     formdata.append('images',state.images)
-     formdata.append('name',state.name)
-     formdata.append('price',state.price)
-     formdata.append('description',state.description)
-     formdata.append('category',state.category)
-    //  formdata.append('colors',state.colors)
-     formdata.append('title',state.title)
-   
-
-     postData('products',formdata).then(data => {
-
-    setProducts(data.name)
-    console.log(data)
-
-    }
-    )
-
-
-}
-
-
-    return (
-        <div>
-            <h1>Product Create {state.images.length}</h1>
-
-
-<form className=' mx-auto border-2 border-green-300' onSubmit={''}>
-    <div className=' flex mt-[33px] mb-[10px]'>
-        <label className='ml-[40px]'>main images </label>
-    <input className='input-class' onChange={setPic} multiple type="file" name="images" value={state.images}/>
-
-    </div>
-    
-
-
+  return (
     <div>
-        
-    <label for="cover" className=" input-class">Update</label>
-                <input
-                  type="file"
-                  name="cover"
-                  id="cover"
-                  multiple
-                  onChange={setPic}
-                  className="img-file2"
-                />
+      <h1>Product</h1>
 
 
-
-    </div>
-
-
-
-
-
-<input type="" name="" value=""/>
-<input type="" name="" value=""/>
-<input type="" name="" value=""/>
-
+{/* -----send data to server------ */}
 
 
 <div>
-    <button type='submit' onClick={ handleSubmit}>submit</button>
+    
+<button type="submit"  onClick={handleSubmit}>
+
+Send data to server
+
+</button>
 
 </div>
 
-
-
-
-</form>
-
-
-
-{/* -------button ----- */}
-
-
-
-
-
-        </div>
-    );
-}
+    </div>
+  );
+};
 
 export default Product;

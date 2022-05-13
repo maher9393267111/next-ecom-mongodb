@@ -1,5 +1,5 @@
 import mongodb from '../../../server/mongodb';
-import Product from '../../../server/models/product'
+// import Product from '../../../server/models/product'
 
 mongodb();
 
@@ -90,6 +90,8 @@ const createProduct = async (req, res) => {
 
 const mainImages =  req.files
 
+console.log(req.body, req.files)
+
 console.log(mainImages,'------------------- main images in server')
 
 
@@ -112,6 +114,7 @@ console.log(mainImages,'------------------- main images in server')
         res.json({msg: 'Success! Created a new product'})
 
     } catch (err) {
+        console.log('-------------- error in server ---------------------')
         return res.status(500).json({err: err.message})
     }
 }
