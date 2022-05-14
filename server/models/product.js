@@ -24,11 +24,10 @@ const  ProductSchema = new mongoose.Schema(
 
 mainImages:[
 
-  {
+  
 
-    secure_url: { type: String },
-    public_id: { type: String },
-  }
+    {type :String}
+  
 ]
 ,
 
@@ -37,8 +36,7 @@ mainImages:[
     colors: [
 
         {
-            name: { type: String, text: true },
-            image: { type: String, text: true },
+          type: String
         }
 
     ],

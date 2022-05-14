@@ -1,5 +1,5 @@
 import mongodb from '../../../server/mongodb';
-// import Product from '../../../server/models/product'
+ import Product from '../../../server/models/product'
 import cloudinary from '../../../utils/cloudinary'
 
 mongodb();
@@ -89,68 +89,35 @@ const createProduct = async (req, res) => {
     
 
 
-        const {title,name,description}  = req.body
-        const images = req.files
-        console.log('productInfo',req.body)
-
-
-
-
-
-// froeach image in images array upload to cloudinary
-
-// const imageobje  = []
-
-// const imagesArray = images.map(async (image11) => {
-//     const result = await cloudinary.uploader.upload(image11,(err, result) => {
-        
-// if (err) {
-//     console.log(err)
-// }
-
-// else
-// {
-//     console.log(result, 'result')
-//     imageobje.push(result)
-    
-// }
-
+        const {title,name,description,colors,mainImages,price}  = req.body
        
-   
-    
-// })
-
-// })
-
-
-
-
-// console.log(imageobje, 'imageobje')
+        console.log('productInfo-->',req.body)
 
 
 
 
 
 
+        const newProduct = new Product({
+            title: title.toLowerCase(), price,
+            //  description,
+            //   content, 
+               mainImages,
+               colors,
+               name,
+        })
 
 
-        // const {title, name,price, inStock, description, content, category, } = req.body
+        const product = await newProduct.save()
+        console.log('product-->',product)
 
-       
+          // find product id
 
-        // category === 'all'
-
-        // if(!title || !price || !name || !description  || category )
-        // return res.status(400).json({err: 'Please add all the fields.'})
-
-
-        // const newProduct = new Product({
-        //     title: title.toLowerCase(), price, inStock, description, content, category, images
-        // })
+            
 
         // await newProduct.save()
 
-        res.json({msg: 'Success! Created a new product', data: req.body.name})
+        res.json({msg: 'Success! Created a new product', data: product})
 
     } catch (err) {
         console.log('-------------- error in server ---------------------')

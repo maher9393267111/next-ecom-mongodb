@@ -9,7 +9,7 @@ const D2 = () => {
   const [resImage, setResImage] = useState([]);
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState("");
-  const [colorsfiles, setcolorsFiles] = useState("");
+  const [colorsfiles, setcolorsFiles] = useState(""); // handle colorsimages files change
   const [info, setInfo] = useState({});
 
   const handleSubmit = async (e) => {
@@ -90,7 +90,7 @@ const colorImages = await Promise.all(
 
       const { url } = uploadRes.data;
       console.log(url);
-      return url;
+      return url;   // result of color images url { colorImages ---> array of urls of color images }
     })
   );
 
@@ -101,9 +101,10 @@ const colorImages = await Promise.all(
       const newproduct = {
         price: 22,
         name: "name",
+        title:'product title',
         category: "category name",
         colors:colorImages ,
-        photos: list, // array of urls of images
+        mainImages: list, // array of urls of images
       };
       console.log("new product--->", newproduct);
 
