@@ -17,6 +17,22 @@ const D2 = () => {
 
 
 
+
+  const children1 = [
+    'black', 'red','orange','blue','grey','green','white'
+  ];
+
+  const children = []
+
+ 
+
+
+  var item;
+  for (item in children1) {
+      children.push(<Option key={children1[item]}>{children1[item]}</Option>);
+  }
+  
+
   function handleChange(value) {
     console.log(`selected ${value}`);
   }
@@ -112,6 +128,7 @@ const D2 = () => {
       </div>
 
       <button
+      className=" block  mb-[44px] mx-auto text-center bg-blue-300 text-white py-2 px-4 mt-[22px]"
         type="submit"
         onClick={handleClick}
         //   onClick={imageUpload}
@@ -121,22 +138,27 @@ const D2 = () => {
 
 
       <>
-    <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
-      <Option value="jack">Jack</Option>
-      <Option value="lucy">Lucy</Option>
-      <Option value="disabled" disabled>
-        Disabled
-      </Option>
-      <Option value="Yiminghe">yiminghe</Option>
+    <Select
+      mode="multiple"
+      allowClear
+      style={{ width: '100%' }}
+      placeholder="Please select"
+      defaultValue={['a10', 'c12']}
+      onChange={handleChange}
+
+    >
+      {children}
     </Select>
-    <Select defaultValue="lucy" style={{ width: 120 }} disabled>
-      <Option value="lucy">Lucy</Option>
-    </Select>
-    <Select defaultValue="lucy" style={{ width: 120 }} loading>
-      <Option value="lucy">Lucy</Option>
-    </Select>
-    <Select defaultValue="lucy" style={{ width: 120 }} allowClear>
-      <Option value="lucy">Lucy</Option>
+    <br />
+    <Select
+      mode="multiple"
+      disabled
+      style={{ width: '100%' }}
+      placeholder="Please select"
+      defaultValue={['a10', 'c12']}
+      onChange={handleChange}
+    >
+      {children}
     </Select>
   </>
 
