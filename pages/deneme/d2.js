@@ -38,7 +38,6 @@ const D2 = () => {
     }
   };
 
-
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -58,22 +57,19 @@ const D2 = () => {
         })
       );
 
-      const newhotel = {
-       
-        photos: list,
+      const newproduct = {
+        price: 22,
+        name: "name",
+        category: "category name",
+        photos: list, // array of urls of images
       };
-      console.log('hotl--->',newhotel);
+      console.log("hotl--->", newproduct);
 
-    //   await axios.post("/hotels", newhotel);
-    } catch (err) {console.log(err)}
+      await axios.post("/api/products", newproduct);
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-
-
-
-
-
-
 
   const imageUpload = async () => {
     // console.log(media);
@@ -110,7 +106,7 @@ const D2 = () => {
   return (
     <div className="text-center">
       <h1 className="mt-[22px] font-bold text-2xl bg-blue-300">D2 : {}</h1>
-{/* 
+      {/* 
       <input
         type="file"
         accept="image/*"
@@ -119,16 +115,12 @@ const D2 = () => {
         onChange={(e) => setMedia(e.target.files)}
       /> */}
 
-
-<input
-                  type="file"
-                  id="file"
-                  multiple
-                  onChange={(e) => setFiles(e.target.files)}
-               
-                />
-
-
+      <input
+        type="file"
+        id="file"
+        multiple
+        onChange={(e) => setFiles(e.target.files)}
+      />
 
       <button
         type="submit"
