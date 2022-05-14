@@ -69,9 +69,12 @@ console.log('colorhere-->',colorhere)
             data
           );
 
-          const { url } = uploadRes.data;
+          const { url,secure_url,public_id } = uploadRes.data;
+
+
           console.log(url);
-          return url;
+          const mainimgs ={}
+          return  mainimgs = {secure_url:secure_url,public_id:public_id};
         })
       );
 
@@ -89,9 +92,15 @@ console.log('colorhere-->',colorhere)
             data
           );
 
-          const { url } = uploadRes.data;
+
+          console.log('uploadRes-->',uploadRes)
+          const { url,secure_url,public_id } = uploadRes.data;
           console.log(url);
-          return url; // result of color images url { colorImages ---> array of urls of color images }
+         // result of color images url { colorImages ---> array of urls of color images }
+
+         const image = {}
+         return  image ={secure_url:secure_url,public_id:public_id};
+
         })
       );
 

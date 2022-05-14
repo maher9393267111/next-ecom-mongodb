@@ -91,7 +91,7 @@ const createProduct = async (req, res) => {
 
         // const {title,name,description,colors,mainImages,price}  = req.body
        
-        console.log('productInfo-->',req.body.colorrenk)
+        console.log('productInfo-->',req.body)
 
 
 
