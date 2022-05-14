@@ -1,61 +1,71 @@
 import React from "react";
 import Link from "next/link";
 import axios from "axios";
-import { Select } from 'antd';
+import '../../styles/deneme.module.css';
+import { Select,Input,Image,Upload, Button,Space } from "antd";
+
+import { UploadOutlined } from '@ant-design/icons';
+
+const { TextArea } = Input;
+
 
 const { Option } = Select;
 import { useState } from "react";
 const D2 = () => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState([]);
+  const [price, setPrice] = useState();
   const [media, setMedia] = useState(null);
   const [resImage, setResImage] = useState([]);
   const [description, setDescription] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [title, setTitle] = useState("");
+
   const [files, setFiles] = useState("");
   const [colorsfiles, setcolorsFiles] = useState(""); // handle colorsimages files change
   const [info, setInfo] = useState({});
 
-   const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState([]);
 
+
+// handle upload
+
+const [upload, setUpload] = useState([]);
 
 
 
   const children1 = [
-    'black', 'red','orange','blue','grey','green','white'
+    "black",
+    "red",
+    "orange",
+    "blue",
+    "grey",
+    "green",
+    "white",
   ];
 
-  const children = []
+  const children = [];
 
- 
-const colorhere = []
+  const colorhere = [];
 
   var item;
   for (item in children1) {
-      children.push(<Option key={children1[item]}>{children1[item]}</Option>);
+    children.push(<Option key={children1[item]}>{children1[item]}</Option>);
   }
-  
 
   function handleChange(value) {
     console.log(`selected ${value}`);
-  
-// push selected colors to colors array
 
-colorhere.push(value)
+    // push selected colors to colors array
 
+    colorhere.push(value);
 
-setColors(colorhere)
-console.log('colorhere-->',colorhere)
-
+    setColors(colorhere);
+    console.log("colorhere-->", colorhere);
   }
-
-
-
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-
-   
       // -------- main images ----------
 
       const list = await Promise.all(
@@ -69,12 +79,11 @@ console.log('colorhere-->',colorhere)
             data
           );
 
-          const { url,secure_url,public_id } = uploadRes.data;
-
+          const { url, secure_url, public_id } = uploadRes.data;
 
           console.log(url);
-          const mainimgs ={}
-          return  mainimgs = {secure_url:secure_url,public_id:public_id};
+          const mainimgs = {};
+          return (mainimgs = { secure_url: secure_url, public_id: public_id });
         })
       );
 
@@ -92,28 +101,26 @@ console.log('colorhere-->',colorhere)
             data
           );
 
-
-          console.log('uploadRes-->',uploadRes)
-          const { url,secure_url,public_id } = uploadRes.data;
+          console.log("uploadRes-->", uploadRes);
+          const { url, secure_url, public_id } = uploadRes.data;
           console.log(url);
-         // result of color images url { colorImages ---> array of urls of color images }
+          // result of color images url { colorImages ---> array of urls of color images }
 
-         const image = {}
-         return  image ={secure_url:secure_url,public_id:public_id};
-
+          const image = {};
+          return (image = { secure_url: secure_url, public_id: public_id });
         })
       );
 
-
-console.log('colors--> when vclick',colors)
+      console.log("colors--> when vclick", colors);
 
       const newproduct = {
-         price: 22,
-         name: "name",
-         title: "product title",
+        price: price,
+        name: name,
+        title: title,
         category: "category name",
-         colors: colorImages,
-         colorrenk: colors[0],
+        colors: colorImages,
+        colorrenk: colors[0],
+
         mainImages: list, // array of urls of images
       };
       console.log("new product--->", newproduct);
@@ -122,7 +129,7 @@ console.log('colors--> when vclick',colors)
         console.log("respons name from post product-->", res);
       });
     } catch (err) {
-      console.log('error message----->',err.message);
+      console.log("error message----->", err.message);
       console.log(err);
     }
   };
@@ -157,8 +164,98 @@ console.log('colors--> when vclick',colors)
         />
       </div>
 
+      {/* -------name------ */}
+
+      <div className=" name-cont
+      mt-[22px] mb-[22px]
+     
+      w-[130px]
+      mx-auto
+      rounded-lg
+      outline-none
+      
+      
+      ">
+        <Input size="large" placeholder="productName" 
+           onChange={(e) => setName(e.target.value)}
+           value={name}
+           type="text"
+           name="name"
+        
+        // prefix={<UserOutlined />} 
+        
+        />
+       
+      </div>
+
+
+
+      {/* ----------description---------- */}
+
+      <div className=" pro-desc
+      w-[333px]
+
+      mx-auto
+      
+      
+      ">
+    
+
+         <TextArea rows={4}
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          placeholder="product-desc" 
+         
+         />
+        
+          
+      
+      </div>
+
+      {/* ---- title---- */}
+
+      <div className=" pro-title
+      w-[140px]
+      mx-auto
+      mt-[22px]
+      mb-[22px]
+      ">
+        <Input size="large" placeholder="large size" 
+           onChange={(e) => setTitle(e.target.value)}
+           value={title}
+           type="text"
+           name="title"
+        
+        // prefix={<UserOutlined />} 
+        
+        />
+       
+        
+      </div>
+
+      {/* ------categories--- */}
+
+      <div className=" product categories">
+        <input type="" name="" value="" />
+      </div>
+
+      {/* ------------price------------ */}
+
+      <div className="pro-price">
+        <input
+          onChange={(e) => setPrice(e.target.value)}
+          value={price}
+          type="number"
+          placeholder="price"
+        />
+      </div>
+
       <button
-      className=" block  mb-[44px] mx-auto text-center bg-blue-300 text-white py-2 px-4 mt-[22px]"
+        className=" block   mb-[44px] mx-auto text-center bg-blue-300 text-white py-4
+        rounded-lg
+        font-bold
+        text-xl
+        px-6 mt-[22px]"
         type="submit"
         onClick={handleClick}
         //   onClick={imageUpload}
@@ -167,22 +264,71 @@ console.log('colors--> when vclick',colors)
       </button>
 
 
-      <>
-    <Select
-      mode="multiple"
-      allowClear
-      style={{ width: '100%' }}
-      placeholder="Please select"
-      defaultValue={['a10', 'c12']}
-      onChange={handleChange}
+<div
+className="
 
-    >
-      {children}
-    </Select>
-    <br />
-   
-  </>
+mt-[44px]
+mb-[66px]
+mx-auto
+w-[300xpx]
+pb-[100px]
+pt-[30px]
 
+"
+
+>
+  
+  <h1
+  className="
+  font-bold
+  text-2xl
+  pb-[12px]
+  bg-green-200
+  mx-auto
+  w-[340px]
+  rounded-full
+  pt-[12px]
+  "
+  
+  >Colors Select</h1>
+
+
+      
+        <Select
+          mode="multiple"
+          allowClear
+      className="
+      w-[400px]
+      "
+
+
+          placeholder="Please select"
+          defaultValue={["a10", "c12"]}
+          onChange={handleChange}
+        >
+          {children}
+        </Select>
+        <br />
+     
+
+      </div>
+
+
+{/* <div
+ className=" 
+ mx-auto
+ mt-[55px]
+ mb-[100px]
+ w-[200px]
+ pb-[55px]
+
+ "
+
+
+>
+  
+
+    </div> */}
 
 
 
