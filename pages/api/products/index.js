@@ -91,7 +91,7 @@ const createProduct = async (req, res) => {
 
         const {title,name,description}  = req.body
         const images = req.files
-        console.log('images',req.body)
+        console.log('productInfo',req.body)
 
 
 
@@ -150,7 +150,7 @@ const createProduct = async (req, res) => {
 
         // await newProduct.save()
 
-        res.json({msg: 'Success! Created a new product'})
+        res.json({msg: 'Success! Created a new product', data: req.body.name})
 
     } catch (err) {
         console.log('-------------- error in server ---------------------')

@@ -63,57 +63,26 @@ const D2 = () => {
         category: "category name",
         photos: list, // array of urls of images
       };
-      console.log("hotl--->", newproduct);
+      console.log("new product--->", newproduct);
 
-      await axios.post("/api/products", newproduct);
+      await axios.post("/api/products", newproduct).then((res) => {
+        console.log('respons name from post product-->',res.data.data);
+
+      }
+        );
     } catch (err) {
       console.log(err);
     }
   };
 
-  const imageUpload = async () => {
-    // console.log(media);
-    const data = new FormData();
-    // upload multiple files to cloudinary
 
-    console.log(media.length);
-
-    for (let i = 0; i < media.length; i++) {
-      console.log("media i--->", media[i]);
-
-      // send arry of images to cloudinary
-
-      data.append("file", media[i]);
-
-      //   data.append('file',media)
-      data.append("upload_preset", "mystory123");
-      data.append("cloud_name", "maher9911133");
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/maher9911133/image/upload",
-        {
-          method: "POST",
-          body: data,
-        }
-      );
-      const res2 = await res.json();
-      console.log(res2.secure_url, "rss------------------>");
-      return setResImage(res2.secure_url);
-    }
-  };
 
   console.log(media, "media");
 
   return (
     <div className="text-center">
       <h1 className="mt-[22px] font-bold text-2xl bg-blue-300">D2 : {}</h1>
-      {/* 
-      <input
-        type="file"
-        accept="image/*"
-        name="mainimages"
-        multiple
-        onChange={(e) => setMedia(e.target.files)}
-      /> */}
+     
 
       <input
         type="file"
