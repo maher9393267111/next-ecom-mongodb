@@ -9,6 +9,7 @@ const D2 = () => {
   const [resImage, setResImage] = useState([]);
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState("");
+  const [colorsfiles, setcolorsFiles] = useState("");
   const [info, setInfo] = useState({});
 
   const handleSubmit = async (e) => {
@@ -38,9 +39,22 @@ const D2 = () => {
     }
   };
 
+
+
+
+
+
+
+
+
+
   const handleClick = async (e) => {
     e.preventDefault();
     try {
+
+// -------- main images ----------
+
+
       const list = await Promise.all(
         Object.values(files).map(async (file) => {
           const data = new FormData();
@@ -57,10 +71,38 @@ const D2 = () => {
         })
       );
 
+
+
+
+
+//------ color image  upload to cloudinary then recive url and save to database ----------
+
+
+const colorImages = await Promise.all(
+    Object.values(colorsfiles).map(async (file) => {
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", "mystory123");
+      const uploadRes = await axios.post(
+        "https://api.cloudinary.com/v1_1/maher9911133/image/upload",
+        data
+      );
+
+      const { url } = uploadRes.data;
+      console.log(url);
+      return url;
+    })
+  );
+
+
+
+
+
       const newproduct = {
         price: 22,
         name: "name",
         category: "category name",
+        colors:colorImages ,
         photos: list, // array of urls of images
       };
       console.log("new product--->", newproduct);
@@ -84,12 +126,46 @@ const D2 = () => {
       <h1 className="mt-[22px] font-bold text-2xl bg-blue-300">D2 : {}</h1>
      
 
-      <input
+     <div className="  mb-[55px]">
+         
+         <h1>  MainImages</h1>
+
+     <input
+        type="file"
+        id="colors-file"
+        multiple
+        onChange={(e) =>  setcolorsFiles(e.target.files)}
+      />
+
+
+
+     </div>
+
+     
+
+{/* ------- colors images------ */}
+
+<div>
+         
+         <h1>  ColorsImages</h1>
+
+     <input
         type="file"
         id="file"
         multiple
         onChange={(e) => setFiles(e.target.files)}
       />
+
+
+
+     </div>
+
+
+
+
+
+
+
 
       <button
         type="submit"
