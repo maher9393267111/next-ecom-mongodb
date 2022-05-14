@@ -15,7 +15,7 @@ const D2 = () => {
   const [colorsfiles, setcolorsFiles] = useState(""); // handle colorsimages files change
   const [info, setInfo] = useState({});
 
-  const [colors, setColors] = useState([]);
+   const [colors, setColors] = useState([]);
 
 
 
@@ -63,6 +63,7 @@ console.log('colorhere-->',colorhere)
           const data = new FormData();
           data.append("file", file);
           data.append("upload_preset", "mystory123");
+          data.append("folder", "/products");
           const uploadRes = await axios.post(
             "https://api.cloudinary.com/v1_1/maher9911133/image/upload",
             data
@@ -81,6 +82,8 @@ console.log('colorhere-->',colorhere)
           const data = new FormData();
           data.append("file", file);
           data.append("upload_preset", "mystory123");
+          // select folder to upload
+          data.append("folder", "/products");
           const uploadRes = await axios.post(
             "https://api.cloudinary.com/v1_1/maher9911133/image/upload",
             data
@@ -92,20 +95,23 @@ console.log('colorhere-->',colorhere)
         })
       );
 
+
+console.log('colors--> when vclick',colors)
+
       const newproduct = {
-        price: 22,
-        name: "name",
-        title: "product title",
+         price: 22,
+         name: "name",
+         title: "product title",
         category: "category name",
-        colors: colorImages,
-        // colorrenk: colorhere,
+         colors: colorImages,
+         colorrenk: colors[0],
         mainImages: list, // array of urls of images
       };
       console.log("new product--->", newproduct);
 
       await axios.post("/api/products", newproduct).then((res) => {
-        console.log("respons name from post product-->", res.data.data);
-      }).catch((err) => { console.log("error from post product-->", err) });
+        console.log("respons name from post product-->", res);
+      });
     } catch (err) {
       console.log('error message----->',err.message);
       console.log(err);

@@ -35,10 +35,15 @@ mainImages:[
 
     colors: [
 
-        {
-            name: { type: String, text: true },
-            image: { type: String,  },
-        }
+
+      {type:String}
+
+
+
+        // {
+        //     name: { type: String, text: true },
+        //     image: { type: String,  },
+        // }
 
     ],
 

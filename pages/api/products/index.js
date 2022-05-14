@@ -1,5 +1,5 @@
 import mongodb from '../../../server/mongodb';
- import Product from '../../../server/models/product'
+//  import Product from '../../../server/models/product'
 import cloudinary from '../../../utils/cloudinary'
 
 mongodb();
@@ -89,38 +89,38 @@ const createProduct = async (req, res) => {
     
 
 
-        const {colorrenk,title,name,description,colors,mainImages,price}  = req.body
+        // const {title,name,description,colors,mainImages,price}  = req.body
        
-        console.log('productInfo-->',req.body)
+        console.log('productInfo-->',req.body.colorrenk)
 
 
 
 
 
 
-        const newProduct = new Product({
-            title: title.toLowerCase(), price,
-            //  description,
-            //   content, 
-               mainImages,
-               colors,
-               name,
-        })
+        // const newProduct = new Product({
+        //     title: title.toLowerCase(), price,
+        //     //  description,
+        //     //   content, 
+        //        mainImages,
+        //        colors,
+        //        name,
+        // })
 
 
-        const product = await newProduct.save()
-        console.log('product-->',product)
+        // const product = await newProduct.save()
+        // console.log('product-->',product)
 
-          // find product id
+        //   // find product id
 
             
 
         // await newProduct.save()
 
-        res.json({msg: 'Success! Created a new product', data: product})
+        res.json({msg: 'Success! Created a new product', data: 'newProduct hello mahger'})
 
     } catch (err) {
         console.log('-------------- error in server ---------------------')
-        return res.status(500).json({err: err.message})
+        return res.status(400).json({err: err.message})
     }
 }
