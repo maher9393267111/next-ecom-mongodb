@@ -36,7 +36,8 @@ mainImages:[
     colors: [
 
         {
-          type: String
+            name: { type: String, text: true },
+            image: { type: String,  },
         }
 
     ],
