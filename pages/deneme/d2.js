@@ -15,6 +15,8 @@ const D2 = () => {
   const [colorsfiles, setcolorsFiles] = useState(""); // handle colorsimages files change
   const [info, setInfo] = useState({});
 
+  const [colors, setColors] = useState([]);
+
 
 
 
@@ -25,7 +27,7 @@ const D2 = () => {
   const children = []
 
  
-
+const colorhere = []
 
   var item;
   for (item in children1) {
@@ -35,6 +37,15 @@ const D2 = () => {
 
   function handleChange(value) {
     console.log(`selected ${value}`);
+  
+// push selected colors to colors array
+
+colorhere.push(value)
+
+
+setColors(colorhere)
+console.log('colorhere-->',colorhere)
+
   }
 
 
@@ -43,6 +54,8 @@ const D2 = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
+
+   
       // -------- main images ----------
 
       const list = await Promise.all(
@@ -85,14 +98,16 @@ const D2 = () => {
         title: "product title",
         category: "category name",
         colors: colorImages,
+        // colorrenk: colorhere,
         mainImages: list, // array of urls of images
       };
       console.log("new product--->", newproduct);
 
       await axios.post("/api/products", newproduct).then((res) => {
         console.log("respons name from post product-->", res.data.data);
-      });
+      }).catch((err) => { console.log("error from post product-->", err) });
     } catch (err) {
+      console.log('error message----->',err.message);
       console.log(err);
     }
   };
@@ -150,16 +165,7 @@ const D2 = () => {
       {children}
     </Select>
     <br />
-    <Select
-      mode="multiple"
-      disabled
-      style={{ width: '100%' }}
-      placeholder="Please select"
-      defaultValue={['a10', 'c12']}
-      onChange={handleChange}
-    >
-      {children}
-    </Select>
+   
   </>
 
 
