@@ -1,13 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import axios from "axios";
-import '../../styles/deneme.module.css';
-import { Select,Input,Image,Upload, Button,Space } from "antd";
+import "../../styles/deneme.module.css";
+import { Select, Input, Image, Upload, Button, Space } from "antd";
 
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
-
 
 const { Option } = Select;
 import { useState } from "react";
@@ -26,12 +25,9 @@ const D2 = () => {
 
   const [colors, setColors] = useState([]);
 
+  // handle upload
 
-// handle upload
-
-const [upload, setUpload] = useState([]);
-
-
+  const [upload, setUpload] = useState([]);
 
   const children1 = [
     "black",
@@ -118,7 +114,7 @@ const [upload, setUpload] = useState([]);
         name: name,
         title: title,
         category: "category name",
-        colors: colorImages,
+        colorsImages: colorImages,
         colorrenk: colors[0],
 
         mainImages: list, // array of urls of images
@@ -137,11 +133,30 @@ const [upload, setUpload] = useState([]);
   console.log(media, "media");
 
   return (
-    <div className="text-center">
-      <h1 className="mt-[22px] font-bold text-2xl bg-blue-300">D2 : {}</h1>
+    <div className="text-center  wrapper pb-[22px] mb-[50px]">
+      <h1 className="mt-[22px] font-bold text-2xl bg-blue-300">
+        PRODUCT CREATE
+      </h1>
 
       <div className="  mb-[55px]">
-        <h1> MainImages</h1>
+        <h1
+          className="  
+w-[277px]
+mt-[33px]
+mb-[33px]
+mx-auto
+font-bold
+p-[10px]
+rounded-full
+
+
+bg-orange-400
+        
+        "
+        >
+          {" "}
+          MainImages
+        </h1>
 
         <input
           type="file"
@@ -154,7 +169,24 @@ const [upload, setUpload] = useState([]);
       {/* ------- colors images------ */}
 
       <div>
-        <h1> ColorsImages</h1>
+        <h1
+          className="  
+        w-[277px]
+        mt-[33px]
+        mb-[33px]
+        mx-auto
+        font-bold
+        p-[10px]
+        rounded-full
+        
+        
+        bg-blue-400
+                
+                "
+        >
+          {" "}
+          ColorsImages
+        </h1>
 
         <input
           type="file"
@@ -166,7 +198,8 @@ const [upload, setUpload] = useState([]);
 
       {/* -------name------ */}
 
-      <div className=" name-cont
+      <div
+        className=" name-cont
       mt-[22px] mb-[22px]
      
       w-[130px]
@@ -175,62 +208,59 @@ const [upload, setUpload] = useState([]);
       outline-none
       
       
-      ">
-        <Input size="large" placeholder="productName" 
-           onChange={(e) => setName(e.target.value)}
-           value={name}
-           type="text"
-           name="name"
-        
-        // prefix={<UserOutlined />} 
-        
+      "
+      >
+        <Input
+          size="large"
+          placeholder="productName"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          type="text"
+          name="name"
+
+          // prefix={<UserOutlined />}
         />
-       
       </div>
-
-
 
       {/* ----------description---------- */}
 
-      <div className=" pro-desc
+      <div
+        className=" pro-desc
       w-[333px]
 
       mx-auto
       
       
-      ">
-    
-
-         <TextArea rows={4}
+      "
+      >
+        <TextArea
+          rows={4}
           onChange={(e) => setDescription(e.target.value)}
           value={description}
-          placeholder="product-desc" 
-         
-         />
-        
-          
-      
+          placeholder="product-desc"
+        />
       </div>
 
       {/* ---- title---- */}
 
-      <div className=" pro-title
+      <div
+        className=" pro-title
       w-[140px]
       mx-auto
       mt-[22px]
       mb-[22px]
-      ">
-        <Input size="large" placeholder="large size" 
-           onChange={(e) => setTitle(e.target.value)}
-           value={title}
-           type="text"
-           name="title"
-        
-        // prefix={<UserOutlined />} 
-        
+      "
+      >
+        <Input
+          size="large"
+          placeholder="large size"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          type="text"
+          name="title"
+
+          // prefix={<UserOutlined />}
         />
-       
-        
       </div>
 
       {/* ------categories--- */}
@@ -250,36 +280,20 @@ const [upload, setUpload] = useState([]);
         />
       </div>
 
-      <button
-        className=" block   mb-[44px] mx-auto text-center bg-blue-300 text-white py-4
-        rounded-lg
-        font-bold
-        text-xl
-        px-6 mt-[22px]"
-        type="submit"
-        onClick={handleClick}
-        //   onClick={imageUpload}
-      >
-        upload
-      </button>
-
-
-<div
-className="
+      <div
+        className="
 
 mt-[44px]
-mb-[66px]
+mb-[33px]
 mx-auto
 w-[300xpx]
-pb-[100px]
+pb-[10px]
 pt-[30px]
 
 "
-
->
-  
-  <h1
-  className="
+      >
+        <h1
+          className="
   font-bold
   text-2xl
   pb-[12px]
@@ -289,19 +303,16 @@ pt-[30px]
   rounded-full
   pt-[12px]
   "
-  
-  >Colors Select</h1>
+        >
+          Colors Select
+        </h1>
 
-
-      
         <Select
           mode="multiple"
           allowClear
-      className="
+          className="
       w-[400px]
       "
-
-
           placeholder="Please select"
           defaultValue={["a10", "c12"]}
           onChange={handleChange}
@@ -309,31 +320,23 @@ pt-[30px]
           {children}
         </Select>
         <br />
-     
-
       </div>
 
-
-{/* <div
- className=" 
- mx-auto
- mt-[55px]
- mb-[100px]
- w-[200px]
- pb-[55px]
-
- "
-
-
->
-  
-
-    </div> */}
-
-
-
-
-      <div>{/* <img src={media} alt=""/> */}</div>
+      <div className="   mb-[66px]">
+        <button
+          className=" block   mx-auto text-center bg-blue-300 text-white py-4
+        rounded-lg
+        font-bold
+        text-xl
+     
+        px-6 mt-[33px]"
+          type="submit"
+          onClick={handleClick}
+          //   onClick={imageUpload}
+        >
+          upload
+        </button>
+      </div>
     </div>
   );
 };

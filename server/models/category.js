@@ -9,6 +9,15 @@ const CategorySchema = new mongoose.Schema(
       minlength: [2, "Too short"],
       maxlength: [32, "Too long"],
     },
+
+image:{
+
+secure_url:String,
+public_id:String
+
+
+}
+
   },
   { timestamps: true }
 );
