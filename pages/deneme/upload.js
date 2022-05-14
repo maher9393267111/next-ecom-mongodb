@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { postData, getData } from "../..//utils/fetchdata";
 import lodash from "lodash";
 import axios from "axios";
+import {createProduct} from './functions'
 const Upload = () => {
   const [file, setFiles] = useState();
   const [description, setDescription] = useState("desc value");
@@ -12,73 +13,152 @@ const Upload = () => {
   const [selectedTags, setSelectedTags] = useState({});
  
 
-  const captureFile = (event) => {
-    const formData = new FormData();
-    setSelectedTags(event.target.files);
-    console.log(event.target.files);
-    console.log('selectedTags------------', selectedTags);
-    formData.set("images", event.target.files);
-    let files = [];
-    for (let file of event.target.files) {
-      files.push(URL.createObjectURL(file));  //  convert image file to url and push to files array
-      console.log(files);
-      setSelectedFiles(files);
-    }
-    setSelectedFiles(files);
-    console.log(selectedFiles, "selectedFiles");
-  };
+  const [fData, setFdata] = useState({
+    name: "",
+    title:'',
+    description: "",
+   
+    images:[]
+    
+  });
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+ //   e.target.reset();
+
+
+
+ try {
+    let responseData = await createProduct(fData);
+    console.log(responseData)
+    if (responseData.success) {
+    //  fetchData();
+      setFdata({
+        ...fData,
+        name: "",
+        description: "",
+        images: [],
+       
+      });
+
+ 
+
+
+  } }
+  catch (error)
+  {  console.log(error,error.message) }
+}
+
+
+
+
+
+
 
   const submit = async (event) => {
     event.preventDefault();
 
   
 
-   
-    const obj = {
-       description: description,
-        images: selectedFiles,
-        image1: selectedTags,
-      }
-      console.log(selectedTags[1], "----------obj");
 
-      
-       
+ createProduct(fData)
       
   
-      axios.post("/api/products",obj );
+    
 
     
   };
 
+
+
   return (
-    <div className="mt-[55px]  ">
-      <h1 className="  text-center p-[11px] w-[333px]  mx-auto bg-blue-300 font-bold container ">
-        upload image file{selectedFiles.length}
-      </h1>
+    <div>
+        <h1>Create form</h1>
+        <form className="w-full" onSubmit={(e) => submit(e)}>
 
-      {/* ---form--- */}
+{/* -------name ----------  */}
 
-      <div>
-        <form onSubmit={submit}>
-          <input
-            filename={file}
-            onChange={captureFile}
-            type="file"
-            accept="image/*"
-            multiple
-          ></input>
-          <input
-            onChange={(e) => setDescription(e.target.value)}
-            type="text"
-          ></input>
-          <button type="submit">Submit</button>
+<label for="">name</label>
+<input
+                  value={fData.name}
+                  onChange={(e) =>
+                    setFdata({
+                      ...fData,
+                      
+                      name: e.target.value,
+                    })
+                  }
+                  className="px-4 py-2 border focus:outline-none"
+                  type="text"
+                />
 
-      
+{/* ------title ------  */}
+<label for="">title</label>
 
-        </form>
-      </div>
+<input
+                  value={fData.title}
+                  onChange={(e) =>
+                    setFdata({
+                      ...fData,
+                    
+                      title: e.target.value,
+                    })
+                  }
+                  className="px-4 py-2 border focus:outline-none"
+                  type="text"
+                />
+
+
+
+{/* ------description----- */}
+<label for="">desc</label>
+
+<input
+                  value={fData.description}
+                  onChange={(e) =>
+                    setFdata({
+                      ...fData,
+                    
+                      description: e.target.value,
+                    })
+                  }
+                  className="px-4 py-2 border focus:outline-none"
+                  type="text"
+                />
+
+
+{/* ------images----- */}
+<input
+                
+                  onChange={(e) =>
+                    setFdata({
+                      ...fData,
+                    
+                      images: [...e.target.files],
+                    })
+                  }
+                  className="px-4 py-2 border focus:outline-none"
+                  type="file"
+                  accept=".jpg, .jpeg, .png"
+                  multiple
+                />
+
+
+{/* -----button ----- */}
+
+<button
+                style={{ background: "#303031" }}
+                type="submit"
+                className="rounded-full bg-gray-800 text-gray-100 text-lg font-medium py-2"
+              >
+                Create product
+              </button>
+
+</form>
+
+
     </div>
-  );
+  )
 };
 
 export default Upload;
